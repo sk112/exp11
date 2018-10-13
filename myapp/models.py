@@ -3,9 +3,10 @@ from django.db import models
 # Create your models here.
 
 from django.db import models
-
+from tinymce.models import HTMLField
 
 class Question(models.Model):
+    sample = HTMLField()
     question_by = models.CharField(max_length=200)
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now_add=True)

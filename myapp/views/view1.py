@@ -66,8 +66,8 @@ def answer_create_form(request ,pk):
         form = create_answer_form(request)
 
         if form.is_valid():
-            ans = form.cleaned_data['Answer']
-            by = form.cleaned_data['by']
+            ans = request.POST.get('Answer')
+            by = request.POST.get('by')
             ans = Answer.objects.get(id = pk)
             a = Answer(answered_by = by, answer_text = ans, pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), answers = ans)
 

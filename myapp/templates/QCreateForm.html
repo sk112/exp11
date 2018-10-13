@@ -1,9 +1,12 @@
 {% extends 'homepage.html' %}
+{% load static %}
+  <script src="{% static 'myapp/js/tinymce/tinymce.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'myapp/js/tinymce/custom.js' %}" ></script>
 
 {% block middle-content %}
     <form action="{% url 'QCreateForm' %}" method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
 
