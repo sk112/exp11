@@ -1,3 +1,5 @@
+from _json import make_encoder
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,6 +8,7 @@ from myapp.models import *
 from django.template import loader
 from django.shortcuts import render,get_object_or_404
 from django.http import Http404
+from django import forms
 
 def homepage(request):
     q_list = Question.objects.all()
@@ -22,3 +25,7 @@ def homepage(request):
         'a_list_size' : a_list_size,
     }
     return render(request, 'homepage.html', context)
+
+class createForm(forms.Form):
+    Question = forms.CharField(label='Question',max_length=200)
+    by = forms.CharField(label='By', max_length=50)
