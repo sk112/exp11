@@ -3,6 +3,8 @@ from django.urls import path
 from myapp.views import *
 
 urlpatterns = [
-    path('home/', home_page.homepage , name='home'),
-    path('home/create/', view1.get_name, name = 'createForm'),
+    path('', home_page.homepage, name ='home'),
+    path('content/', home_page.content , name='content'),
+    path('create/', view1.question_create_form, name = 'QCreateForm'),
+    path('answer/<int:pk>',view1.answer_create_form, name = 'ACreateForm'),
 ]

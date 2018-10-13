@@ -1,0 +1,43 @@
+
+{% extends 'homepage.html' %}
+{% load custom_tags %}
+{% block middle-content %}
+<div class="col-lg-9">
+
+        <div style="border:3px solid;">
+            <ul>
+                {% for i in q_list %}
+
+                    <li>
+                        <div style="border:3px solid;">
+                            <h4>{{  i.question_text }}</h4>
+
+                        </div>
+
+                        <ul style="border:3px solid green;">
+
+                            {% for j in a_list|at_index:i.id %}
+                                <li>
+                                    <div><p style="border:3px solid;">{{ j.answer_text }}</p></div>
+                                </li>
+                            {% empty %}
+                                <li>
+                                    <div><p style="border:3px solid;">Be First to Answer!</p></div>
+                                </li>
+                            {% endfor %}
+                            <li>
+                                <div>
+                                    <form action="{% url 'ACreateForm' i.id %}" method="get">
+                                        <button>Answer It!</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock middle-content %}

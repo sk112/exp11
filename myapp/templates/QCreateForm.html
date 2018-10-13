@@ -1,5 +1,10 @@
-<form action="{% url 'createForm' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-</form>
+{% extends 'homepage.html' %}
+
+{% block middle-content %}
+    <form action="{% url 'QCreateForm' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock middle-content %}

@@ -11,6 +11,11 @@ from django.http import Http404
 from django import forms
 
 def homepage(request):
+
+    return render(request, 'homepage.html', {})
+
+
+def content(request):
     q_list = Question.objects.all()
 
     a_list = {}
@@ -24,8 +29,5 @@ def homepage(request):
         'a_list' : a_list,
         'a_list_size' : a_list_size,
     }
-    return render(request, 'homepage.html', context)
+    return render(request, 'content.html', context)
 
-class createForm(forms.Form):
-    Question = forms.CharField(label='Question',max_length=200)
-    by = forms.CharField(label='By', max_length=50)

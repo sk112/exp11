@@ -9,7 +9,7 @@ from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from datetime import *
-from .home_page import createForm
+from .form_views import *
 from . import home_page
 
 def index(request):
@@ -36,11 +36,11 @@ def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
 
-def get_name(request):
+def question_create_form(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = createForm(request.POST)
+        form = create_question_form(request.POST)
         # check whether it's valid:
         if form.is_valid():
 
@@ -50,14 +50,27 @@ def get_name(request):
             q = Question(question_text = question, question_by = by , pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             q.save()
 
-            # process the data in form.cleaned_data as required
-            # ...
             # redirect to a new URL:
-
-            return redirect(to='home',permanent=True)
+            return redirect(to = 'home',permanent = True)
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = createForm()
+        form = create_question_form()
 
-    return render(request, 'QCreateForm.html', {'form': form})
+    return render(request,'QCreateForm.html',{'form': form})
+
+
+def answer_create_form(request ,pk):
+
+    if request.method == 'POST':
+        form = create_answer_form(request)
+
+        if form.is_valid():
+            ans = form.cleaned_data['Answer']
+            by = form.cleaned_data['by']
+            ans = Answer.objects.get(id = pk)
+            a = Answer(answered_by = by, answer_text = ans, pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), answers = ans)
+
+    else:
+        form = create_answer_form()
+    return render(request,'ACreateForm.html', {'form': form , 'pk':pk})
