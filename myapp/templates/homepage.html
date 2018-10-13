@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/sandstone/bootstrap.css">
+
+    <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="img/favicon.png" type="image/png">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="vendors/linericon/style.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="vendors/animate-css/animate.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+     {% load custom_tags %}
+<div class="blog_details">
+
+    <div>
+    <ol>
+    {% for i in q_list %}
+
+        <li>
+            <div class="d-flex w-100 justify-content-between">
+                <h4>{{  i.question_text }}</h4>
+
+            </div>
+
+                <ul>
+
+                        {% for j in a_list|at_index:i.id %}
+                            <li>
+                                <p>{{ j.answer_text }}</p>
+                            </li>
+                        {% empty %}
+                            <li>
+                                <p>Be First to Answer!</p>
+                            </li>
+                        {% endfor %}
+
+                </ul>
+
+        </li>
+    {% endfor %}
+    </ol>
+    </div>
+</div>
+
+
+</body>
+</html>
