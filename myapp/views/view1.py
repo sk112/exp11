@@ -73,8 +73,8 @@ def answer_create_form(request,pk):
         if form.is_valid():
             ans = request.POST.get('Answer')
             by = request.POST.get('by')
-            ans = Question.objects.get(id=pk)
-            a = Answer(answered_by=by, answer_text=ans, pub_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), answers=ans)
+            answer = Question.objects.get(id=pk)
+            a = Answer(answered_by=by, answer_text=ans, answers=answer)
             a.save()
 
             return redirect(to='content', permanent=True)
