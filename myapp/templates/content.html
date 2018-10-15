@@ -10,7 +10,14 @@
 
                     <li>
                         <div style="border:3px solid;">
-                            <h4>{{  i.question_text }}</h4>
+                            <div>
+                                <div>
+                                    <h4><b>{{  i.question_title }}</b></h4>
+                                </div>
+                                <div>
+                                    <p >{{ i.question_text }}</p>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -18,7 +25,11 @@
 
                             {% for j in a_list|at_index:i.id %}
                                 <li>
-                                    <div><p style="border:3px solid;">{{ j.answer_text }}</p></div>
+                                    <div>
+                                        <div>
+                                            <p style="border:3px solid;">{{ j.answer_text }}</p>
+                                        </div>
+                                    </div>
                                 </li>
                             {% empty %}
                                 <li>

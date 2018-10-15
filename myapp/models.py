@@ -7,9 +7,9 @@ from tinymce.models import HTMLField
 
 
 class Question(models.Model):
-    sample = HTMLField()
     question_by = models.CharField(max_length=200)
-    question_text = models.CharField(max_length=200)
+    question_title = models.CharField(max_length=10, default='No Title')
+    question_text = models.TextField(max_length=1024)
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

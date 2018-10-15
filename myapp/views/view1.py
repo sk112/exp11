@@ -48,14 +48,15 @@ def question_create_form(request):
         # check whether it's valid:
         if form.is_valid():
 
-            question = form.cleaned_data['Question']
+            title = form.cleaned_data['Title']
+            desc = form.cleaned_data['Description']
             by = form.cleaned_data['by']
 
-            q = Question(question_text=question, question_by=by, pub_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            q = Question(question_text=desc, question_title=title, question_by=by)
             q.save()
 
             # redirect to a new URL:
-            return redirect(to='home', permanent=True)
+            return redirect(to='content', permanent=True)
 
     # if a GET (or any other method) we'll create a blank form
     else:
