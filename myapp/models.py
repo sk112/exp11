@@ -5,6 +5,7 @@ from django.db import models
 from django.db import models
 from tinymce.models import HTMLField
 
+
 class Question(models.Model):
     sample = HTMLField()
     question_by = models.CharField(max_length=200)
@@ -13,6 +14,7 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_by
+
 
 class Answer(models.Model):
     answered_by = models.CharField(max_length=200)

@@ -12,6 +12,7 @@ from datetime import *
 from .form_views import *
 from . import home_page
 
+
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('index.html')
@@ -21,6 +22,7 @@ def index(request):
     return render(request,'index.html',context)
     #return HttpResponse(template.render(context, request))
 
+
 def indexPerID(request,question_id):
     return HttpResponse("Hello: question is: %d" % question_id)
 
@@ -28,9 +30,11 @@ def detail(request, question_id):
     question = get_object_or_404(Question, pk = question_id)
     return render(request, 'detail.html', {'question': question})
 
+
 def results(request, question_id):
     response = "You're looking at the results of question %s."
     return HttpResponse(response % question_id)
+
 
 def vote(request, question_id):
     return HttpResponse("You're voting on question %s." % question_id)
@@ -47,11 +51,11 @@ def question_create_form(request):
             question = form.cleaned_data['Question']
             by = form.cleaned_data['by']
 
-            q = Question(question_text = question, question_by = by , pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            q = Question(question_text=question, question_by=by, pub_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             q.save()
 
             # redirect to a new URL:
-            return redirect(to = 'home',permanent = True)
+            return redirect(to='home', permanent=True)
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -60,17 +64,19 @@ def question_create_form(request):
     return render(request,'QCreateForm.html',{'form': form})
 
 
-def answer_create_form(request ,pk):
+def answer_create_form(request,pk):
 
     if request.method == 'POST':
-        form = create_answer_form(request)
+        form = create_answer_form(request.POST)
 
         if form.is_valid():
             ans = request.POST.get('Answer')
             by = request.POST.get('by')
-            ans = Answer.objects.get(id = pk)
-            a = Answer(answered_by = by, answer_text = ans, pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), answers = ans)
+            ans = Question.objects.get(id=pk)
+            a = Answer(answered_by=by, answer_text=ans, pub_date=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), answers=ans)
+            a.save()
 
+            return redirect(to='content', permanent=True)
     else:
         form = create_answer_form()
     return render(request,'ACreateForm.html', {'form': form , 'pk':pk})
