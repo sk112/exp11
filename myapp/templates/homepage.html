@@ -2,27 +2,30 @@
 <head>
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.css">
+    <link rel="stylesheet" href="C:\Users\mohammak\PycharmProjects\exp11\myapp\templates\design.css">
     <title>webpage</title>
 </head>
 <body>
-<div id="sidebar" style="display:block;position:fixed;top:0;left:0;width:100%;">
-    {% block sidebar %}
-            {% include 'navbar.html' %}
-    {% endblock %}
-</div>
+<div>
+    <div style="display:block;position:fixed;top:0;left:0;width:100%;margin-bottom:20px;">
+        {% block sidebar %}
+                {% include 'navbar.html' %}
+        {% endblock %}
+    </div>
 
-<br/><br/>
+    <br/><br/>
+    <div style="overflow:auto">
+        {% block left-sidebar %}
 
-{% block left-sidebar %}
-
-{% endblock %}
-
-{% block middle-content %}
-    {% include 'middle_content.html' %}
-{% endblock middle-content %}
-
+        {% endblock %}
+    </div>
+    <div >
+        {% block middle-content %}
+            {% include 'middle_content.html' %}
+        {% endblock middle-content %}
+    </div>
 {% block right-sidebar %}
 {% endblock right-sidebar%}
-
+</div>
 </body>
 </html>

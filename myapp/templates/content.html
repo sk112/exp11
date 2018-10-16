@@ -2,20 +2,24 @@
 {% extends 'homepage.html' %}
 {% load custom_tags %}
 {% block middle-content %}
+
 <div class="col-lg-9">
 
-        <div style="border:3px solid;">
+        <div style="border:3px solid;margin-top:100px;">
             <ul>
                 {% for i in q_list %}
 
                     <li>
                         <div style="border:3px solid;">
-                            <div>
+                            <div style="overflow:auto;border:1px solid;">
                                 <div>
                                     <h4><b>{{  i.question_title }}</b></h4>
                                 </div>
-                                <div>
+                                <div style="border:1px solid;">
                                     <p >{{ i.question_text }}</p>
+                                </div>
+                                <div style="float:right;margin:10px;">
+                                    <p><b>By:{{ i.question_by }}</b></p>
                                 </div>
                             </div>
 
@@ -25,9 +29,13 @@
 
                             {% for j in a_list|at_index:i.id %}
                                 <li>
-                                    <div>
+                                    <div style="overflow:auto;border:1px solid;">
                                         <div>
                                             <p style="border:3px solid;">{{ j.answer_text }}</p>
+                                        </div>
+                                        <div style="display:inline;border:1px;solid;float:right;margin:10px;">
+                                            <p style="align-text:center;"><b>By:{{ j.answered_by }}</b></p>
+                                            <p style="align-text:center;"> {{ j.pub_date }} </p>
                                         </div>
                                     </div>
                                 </li>
@@ -50,5 +58,5 @@
                 {% endfor %}
             </ul>
         </div>
-    </div>
+</div>
 {% endblock middle-content %}
