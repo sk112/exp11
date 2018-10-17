@@ -20,6 +20,7 @@
                                 </div>
                                 <div style="float:right;margin:10px;">
                                     <p><b>By:{{ i.question_by }}</b></p>
+                                    <p>{{ i.pub_date }}</p>
                                 </div>
                             </div>
 
@@ -34,8 +35,7 @@
                                             <p style="border:3px solid;">{{ j.answer_text }}</p>
                                         </div>
                                         <div style="display:inline;border:1px;solid;float:right;margin:10px;">
-                                            <p style="align-text:center;"><b>By:{{ j.answered_by }}</b></p>
-                                            <p style="align-text:center;"> {{ j.pub_date }} </p>
+                                            <p style="align-text:center;"><b>{{ j.answered_by }}  {{ j.pub_date }}</b></p>
                                         </div>
                                     </div>
                                 </li>
